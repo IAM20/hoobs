@@ -3,13 +3,25 @@ package com.github.iam20.device.config;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.List;
 import java.util.Properties;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
+
+import com.github.iam20.device.model.MacAddress;
+import com.github.iam20.device.model.TempHumid;
+import com.github.iam20.device.util.InetAddressListMaker;
+import com.github.iam20.device.model.CoreInformation;
+
+@Slf4j
 public class ApplicationConfig {
 	private static String netMask;
 	private static String ipAddr;
 	private static String serverIpAddr;
 	private static String serverPortNumber;
+	private static CoreInformation coreInformation = new CoreInformation();
 
 	public static void init() {
 		try {
@@ -29,6 +41,11 @@ public class ApplicationConfig {
 			e.printStackTrace();
 			System.exit(1);
 		}
+		InetAddressListMaker.initInetAddrPool(getIpPair());
+	}
+
+	public static Pair<String, Integer> getIpPair() {
+		return new ImmutablePair<>(ipAddr, Integer.parseInt(netMask));
 	}
 
 	public static String getProxyServerUri() {
@@ -53,5 +70,17 @@ public class ApplicationConfig {
 
 	public static String getServerPortNumber() {
 		return serverPortNumber;
+	}
+
+	public static void setMacAddresses(List<MacAddress> macAddressList) {
+		coreInformation.setMacAddresses(macAddressList);
+	}
+
+	public static void setTempHumid(TempHumid tempHumid) {
+		coreInformation.setTempHumid(tempHumid);
+	}
+
+	public static CoreInformation getCoreInformation() {
+		return coreInformation;
 	}
 }
