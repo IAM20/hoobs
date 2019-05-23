@@ -28,9 +28,9 @@ public class ArpExecutor {
 			try {
 				InetAddress inetAddress = InetAddress.getByName(inetAddr);
 				if (inetAddress.isReachable(100)) {
-					log.info("{} is reachable!", inetAddr);
+					log.debug("{} is reachable!", inetAddr);
 				} else {
-					log.info("{} is unreachable (connection timeout)", inetAddr);
+					log.debug("{} is unreachable (connection timeout)", inetAddr);
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

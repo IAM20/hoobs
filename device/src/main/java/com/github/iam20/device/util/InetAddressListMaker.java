@@ -25,14 +25,15 @@ public class InetAddressListMaker {
 			binaryIpAddressBuf.append(str);
 		}
 		address = binaryIpAddressBuf.toString();
-
+		log.debug(address);
+		log.debug("{}", mask);
 		StringBuilder buf = new StringBuilder();
 		for (int i = 0; i < mask; i++) {
 			buf.append(address.charAt(i));
 		}
 
 		int rightPadding = 1 << (32 - mask);
-		for (int i = 0; i < rightPadding; i++) {
+		for (int i = 2; i < rightPadding - 1; i++) {
 			String lastElement = Integer.toBinaryString(i);
 			lastElement = addPadding(lastElement, 32 - mask);
 			String binaryInetAddress = buf.toString() + lastElement;
