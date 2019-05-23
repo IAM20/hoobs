@@ -30,10 +30,10 @@ public class InformationManager extends CoapResource {
 		if (!ApplicationConfig.getCoreInformation().equals(coreInformation)) {
 			code = HttpClientApplication.send(coreInformation);
 		}
-		json = new JSONObject();
-		if (code / 200 == 1) {
-			code = 200;
+		if (code % 200 < 100) {
+			code = 205;
 		}
+		json = new JSONObject();
 		json.put("code", code);
 		ApplicationConfig.setCoreInformation(coreInformation);
 

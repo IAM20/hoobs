@@ -9,7 +9,7 @@ import java.util.Properties;
 
 @Slf4j
 public class ApplicationConfig {
-	private static CoreInformation coreInformation;
+	private static CoreInformation coreInformation = new CoreInformation();
 	private static String restServerIp;
 	private static String restServerPort;
 
