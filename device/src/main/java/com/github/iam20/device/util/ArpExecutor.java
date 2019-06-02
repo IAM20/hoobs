@@ -22,7 +22,7 @@ public class ArpExecutor {
 	private static final String UNKNOWN_MAC_ADDR = "(incomplete)";
 	private static final String UNKNOWN_MAC_ADDR2 = "<incomplete>";
 	private static final String BROADCAST_MAC_ADDR = "ff:ff:ff:ff:ff:ff";
-	private static final Pattern pattern = Pattern.compile("(.*) \\((.*)\\) at (.*) on (.*)");
+	private static final Pattern pattern = Pattern.compile("(.*) \\((.*)\\) at (.*) (.*) on (.*)");
 
 	private static List<String> inetAddressList = InetAddressListMaker.getInetList();
 	private static Set<String> inetAddressMap = InetAddressListMaker.getInetSet();

@@ -33,11 +33,11 @@ public class ApplicationConfig {
 		List<MacAddress> macAddresses = Arrays.asList(
 				new MacAddressBuilder()
 						.macAddr("ff:ff:ff:ff:ff:ff")
-						.orgName("Apple Inc")
+						.vendor("Apple Inc")
 						.build(),
 				new MacAddressBuilder()
 						.macAddr("fe:ff:ff:ff:ff:ff")
-						.orgName("samsung electronics")
+						.vendor("samsung electronics")
 						.build()
 		);
 		TempHumid tempHumid = new TempHumidBuilder()

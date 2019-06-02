@@ -9,5 +9,5 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class MacAddress {
 	private String macAddr;
-	private String orgName;
+	private String vendor;
 }

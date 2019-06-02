@@ -12,8 +12,8 @@ public class MacAddressBuilder {
 		return this;
 	}
 
-	public MacAddressBuilder orgName(String orgName) {
-		macAddress.setOrgName(orgName);
+	public MacAddressBuilder vendor(String orgName) {
+		macAddress.setVendor(orgName);
 		return this;
 	}
 

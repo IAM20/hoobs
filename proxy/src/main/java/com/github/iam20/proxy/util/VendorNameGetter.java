@@ -25,6 +25,7 @@ public class VendorNameGetter {
 
 		StringBuilder buf = new StringBuilder(SQL_LEFT);
 		for (MacAddress macAddress : macAddresses) {
+			macAddress.setMacAddr(macAddress.getMacAddr().toUpperCase());
 			String prefix = macAddress.getMacAddr().substring(0, 8);
 			buf.append("mac_addr = '").append(prefix).append("' OR ");
 			macAddressMap.put(prefix, macAddress);
