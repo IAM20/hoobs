@@ -76,7 +76,7 @@ public class ArpExecutor {
 				 || macAddr.equals(BROADCAST_MAC_ADDR)
 				 || macAddr.equals(UNKNOWN_MAC_ADDR2)
 				 || !inetAddressMap.contains(ipAddr)) continue;
-				MacAddress macAddress = new MacAddressBuilder().macAddr(macAddr)
+				MacAddress macAddress = new MacAddressBuilder().macAddr(macAddr.toUpperCase())
 						.build();
 				macAddresses.add(macAddress);
 			}

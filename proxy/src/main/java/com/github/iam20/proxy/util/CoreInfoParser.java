@@ -20,15 +20,14 @@ public class CoreInfoParser {
 					.build());
 		}
 		JSONObject tempHumidJson = json.getJSONObject("temphumid");
-
-		TempHumid tempHumid = new TempHumidBuilder()
-				.humid((Double)tempHumidJson.get("humid"))
-				.celsius((Double)tempHumidJson.get("celsius"))
+		TempHumid tempHumid;
+		tempHumid = new TempHumidBuilder()
+				.humid(tempHumidJson.getDouble("humid"))
+				.celsius(tempHumidJson.getDouble("celsius"))
 				.build();
 
 		return CoreInformation.builder()
 				.macAddresses(macAddresses)
-
 				.tempHumid(tempHumid)
 				.build();
 	}
