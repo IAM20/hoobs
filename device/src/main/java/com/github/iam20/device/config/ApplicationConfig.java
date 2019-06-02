@@ -1,8 +1,11 @@
 package com.github.iam20.device.config;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Properties;
 
@@ -23,25 +26,45 @@ public class ApplicationConfig {
 	private static String serverPortNumber;
 	private static CoreInformation coreInformation = new CoreInformation();
 
+	private static Properties properties;
+
 	public static void init() {
 		try {
-			InputStream inputStream = ApplicationConfig.class
-					.getClassLoader()
-					.getResourceAsStream("application.properties");
-			Properties properties = new Properties();
-			properties.load(inputStream);
+			loadProperties();
 			serverIpAddr = (String)properties.get("proxyServerIp");
 			serverPortNumber = (String)properties.get("proxyServerPort");
-
 			ipAddr = InetAddress.getLocalHost().getHostAddress();
-			NetworkInterface networkInterface = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
-			int intNetMask = networkInterface.getInterfaceAddresses().get(1).getNetworkPrefixLength();
-			netMask = Integer.toString(intNetMask);
+			netMask = Integer.toString(loadNetMask());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
 		}
 		InetAddressListMaker.initInetAddrPool(getIpPair());
+	}
+
+	private static void loadProperties() {
+		InputStream inputStream = ApplicationConfig.class
+				.getClassLoader()
+				.getResourceAsStream("application.properties");
+		properties = new Properties();
+		try {
+			properties.load(inputStream);
+		} catch (IOException e) {
+			log.error("Failed to load properties");
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
+
+	private static int loadNetMask() {
+		try {
+			NetworkInterface networkInterface = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
+			return networkInterface.getInterfaceAddresses().get(1).getNetworkPrefixLength();
+		} catch (UnknownHostException | SocketException e) {
+			log.error("Failed to load network mask");
+			e.printStackTrace();
+			System.exit(1);
+		} return -1;
 	}
 
 	public static Pair<String, Integer> getIpPair() {

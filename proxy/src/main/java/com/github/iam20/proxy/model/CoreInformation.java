@@ -22,7 +22,7 @@ public class CoreInformation {
 		buf.append("MAC Addresses\n");
 		for (MacAddress macAddress : macAddresses) {
 			buf.append(i).append(" : ").append(macAddress.getMacAddr()).append("\n");
-			buf.append(i++).append(" : ").append(macAddress.getOrgName()).append("\n");
+			buf.append(i++).append(" : ").append(macAddress.getVendor()).append("\n");
 		}
 		buf.append("Temperature and humidity\n");
 		buf.append("Temperature : ").append(tempHumid.getCelsius()).append("\n");

@@ -3,7 +3,8 @@ package com.github.iam20.proxy.coap;
 import com.github.iam20.proxy.config.ApplicationConfig;
 import com.github.iam20.proxy.http.HttpClientApplication;
 import com.github.iam20.proxy.model.CoreInformation;
-import com.github.iam20.proxy.util.ParseCoreInfo;
+import com.github.iam20.proxy.util.CoreInfoParser;
+import com.github.iam20.proxy.util.VendorNameGetter;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.californium.core.CoapResource;
 import org.eclipse.californium.core.coap.CoAP;
@@ -25,7 +26,8 @@ public class InformationManager extends CoapResource {
 	public void handlePOST(CoapExchange exchange) {
 		String requestText = exchange.getRequestText();
 		JSONObject json = new JSONObject(requestText.toLowerCase());
-		CoreInformation coreInformation = ParseCoreInfo.parse(json);
+		CoreInformation receivedInformation = CoreInfoParser.parse(json);
+		CoreInformation coreInformation = VendorNameGetter.getVendorName(receivedInformation);
 		int code = 200;
 		if (!ApplicationConfig.getCoreInformation().equals(coreInformation)) {
 			code = HttpClientApplication.send(coreInformation);

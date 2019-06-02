@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParseCoreInfo {
+public class CoreInfoParser {
 	public static CoreInformation parse(JSONObject json) {
 		JSONArray jsonArray = json.getJSONArray("macaddresses");
 		int len = jsonArray.length();
@@ -28,6 +28,7 @@ public class ParseCoreInfo {
 
 		return CoreInformation.builder()
 				.macAddresses(macAddresses)
+
 				.tempHumid(tempHumid)
 				.build();
 	}

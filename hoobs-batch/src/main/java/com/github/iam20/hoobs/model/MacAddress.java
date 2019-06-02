@@ -1,4 +1,4 @@
-package com.github.iam20.proxy.model;
+package com.github.iam20.hoobs.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class MacAddress {
-	private String macAddr;
-	private String vendor;
+	String macAddr;
+	String vendor;
 }

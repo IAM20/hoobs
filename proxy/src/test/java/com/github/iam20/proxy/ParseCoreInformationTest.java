@@ -3,7 +3,7 @@ package com.github.iam20.proxy;
 import static org.junit.Assert.assertEquals;
 
 import com.github.iam20.proxy.model.*;
-import com.github.iam20.proxy.util.ParseCoreInfo;
+import com.github.iam20.proxy.util.CoreInfoParser;
 import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 import org.junit.Before;
@@ -42,7 +42,7 @@ public class ParseCoreInformationTest {
 	@Test
 	public void test() {
 		JSONObject json = new JSONObject(testJsonMsg.toLowerCase());
-		CoreInformation coreInformation = ParseCoreInfo.parse(json);
+		CoreInformation coreInformation = CoreInfoParser.parse(json);
 		assertEquals(macAddressList, coreInformation.getMacAddresses());
 		assertEquals(tempHumid, coreInformation.getTempHumid());
 

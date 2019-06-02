@@ -19,7 +19,10 @@ import com.github.iam20.device.model.MacAddressBuilder;
 
 @Slf4j
 public class ArpExecutor {
+	private static final String UNKNOWN_MAC_ADDR = "(incomplete)";
+	private static final String BROADCAST_MAC_ADDR = "ff:ff:ff:ff:ff:ff";
 	private static final Pattern pattern = Pattern.compile("(.*) \\((.*)\\) at (.*) on (.*)");
+
 	private static List<String> inetAddressList = InetAddressListMaker.getInetList();
 	private static Set<String> inetAddressMap = InetAddressListMaker.getInetSet();
 
@@ -64,11 +67,12 @@ public class ArpExecutor {
 		for (String line : strings) {
 			matcher = pattern.matcher(line);
 			String macAddr, ipAddr;
+
 			if (matcher.find()) {
 				macAddr = matcher.group(3);
 				ipAddr = matcher.group(2);
-				if (macAddr.equals("(incomplete)")
-				 || macAddr.equals("ff:ff:ff:ff:ff:ff")
+				if (macAddr.equals(UNKNOWN_MAC_ADDR)
+				 || macAddr.equals(BROADCAST_MAC_ADDR)
 				 || !inetAddressMap.contains(ipAddr)) continue;
 				MacAddress macAddress = new MacAddressBuilder().macAddr(macAddr)
 						.build();
@@ -81,11 +85,6 @@ public class ArpExecutor {
 
 
 	public static List<MacAddress> findAllDevice() {
-		/**
-		 * 1. ping for all ip that have same network mask..
-		 * 2. ARP -a
-		 */
-
 		executePingAll();
 		String result = executeArp();
 		return stringToMacAddress(result);

@@ -13,7 +13,7 @@ public class  MacAddressBuilder {
 	}
 
 	public MacAddressBuilder orgName(String orgName) {
-		macAddress.setOrgName(orgName);
+		macAddress.setVendor(orgName);
 		return this;
 	}
 
