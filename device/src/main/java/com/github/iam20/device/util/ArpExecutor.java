@@ -20,6 +20,7 @@ import com.github.iam20.device.model.MacAddressBuilder;
 @Slf4j
 public class ArpExecutor {
 	private static final String UNKNOWN_MAC_ADDR = "(incomplete)";
+	private static final String UNKNOWN_MAC_ADDR2 = "<incomplete>";
 	private static final String BROADCAST_MAC_ADDR = "ff:ff:ff:ff:ff:ff";
 	private static final Pattern pattern = Pattern.compile("(.*) \\((.*)\\) at (.*) on (.*)");
 
@@ -73,6 +74,7 @@ public class ArpExecutor {
 				ipAddr = matcher.group(2);
 				if (macAddr.equals(UNKNOWN_MAC_ADDR)
 				 || macAddr.equals(BROADCAST_MAC_ADDR)
+				 || macAddr.equals(UNKNOWN_MAC_ADDR2)
 				 || !inetAddressMap.contains(ipAddr)) continue;
 				MacAddress macAddress = new MacAddressBuilder().macAddr(macAddr)
 						.build();

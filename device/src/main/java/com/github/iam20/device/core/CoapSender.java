@@ -14,6 +14,7 @@ public class CoapSender {
 	public static void send() {
 		String uri = ApplicationConfig.getProxyServerUri() + "info";
 		log.debug("Send CoAP request to {}", uri);
+		client.setURI(uri);
 		JSONObject json = new JSONObject(ApplicationConfig.getCoreInformation());
 		CoapResponse response = client.post(json.toString(), MediaTypeRegistry.APPLICATION_JSON);
 		log.info(response.getResponseText());

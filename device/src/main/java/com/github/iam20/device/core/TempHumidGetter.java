@@ -14,11 +14,6 @@ public class TempHumidGetter {
 	private static final int TIMEOUT = 85;
 	public static Thread makeThread() {
 		return new Thread(() -> {
-			if (wiringPiSetup() == -1); {
-				log.error("GPIO SETUP FAILED");
-				System.exit(1);
-				export(3, DIRECTION_OUT);
-			}
 			int laststate = Gpio.HIGH;
 			int j = 0;
 			int[] dht11Dat = {0, 0, 0, 0, 0};
@@ -37,12 +32,13 @@ public class TempHumidGetter {
 					Gpio.delayMicroseconds(1);
 					if (counter == 255) break;
 				}
-
-				dht11Dat[j / 8] <<= 1;
-				if (counter > 16) {
-					dht11Dat[j / 8] |= 1;
+				if ((i >= 4) && (i % 2 == 0)) {
+					dht11Dat[(j / 8) % 5] <<= 1;
+					if (counter > 16) {
+						dht11Dat[(j / 8) % 5] |= 1;
+					}
+					j++;
 				}
-				j++;
 			}
 			if ((j >= 40) && dht11Dat[4] == ((
 					dht11Dat[0] + dht11Dat[1] + dht11Dat[2] + dht11Dat[3]) & 0xFF

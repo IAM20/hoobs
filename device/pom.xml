@@ -136,7 +136,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>com.github.iam20.Main</mainClass>
+							<mainClass>com.github.iam20.device.Main</mainClass>
 						</manifest>
 					</archive>
 					<descriptorRefs>
