@@ -23,13 +23,13 @@ import com.github.iam20.hoobs.model.MacAddress;
 
 @Slf4j
 @Component
-public class MacAddressWriter implements ItemStreamWriter<MacAddress> {
+public class VendorNameWriter implements ItemStreamWriter<MacAddress> {
 	private Map<String, String> macVendorMap;
 	private RowMapper<MacAddress> rowMapper = BeanPropertyRowMapper.newInstance(MacAddress.class);
 	private NamedParameterJdbcTemplate jdbcTemplate;
 	private ExecutionContext executionContext;
 
-	public MacAddressWriter(@Qualifier("hoobsDataSource")DataSource dataSource) {
+	public VendorNameWriter(@Qualifier("hoobsDataSource")DataSource dataSource) {
 		jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
 		macVendorMap = new HashMap<>();
 	}

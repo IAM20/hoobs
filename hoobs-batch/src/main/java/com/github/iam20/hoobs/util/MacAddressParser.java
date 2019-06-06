@@ -19,7 +19,6 @@ public class MacAddressParser {
 			macAddress.setVendor(matcher.group(4));
 			return macAddress;
 		}
-		//log.info("Failed to find pattern");
 		return null;
 	}
 }

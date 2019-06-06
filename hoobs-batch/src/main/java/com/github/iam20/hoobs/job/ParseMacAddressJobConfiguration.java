@@ -32,8 +32,8 @@ public class ParseMacAddressJobConfiguration {
 	}
 
 	@Bean
-	public Step parseMac(MacAddressReader reader,
-	                     MacAddressWriter writer) {
+	public Step parseMac(VendorNameReader reader,
+	                     VendorNameWriter writer) {
 		return stepBuilderFactory.get("parseMac")
 				.<MacAddress, MacAddress>chunk(Integer.MAX_VALUE)
 				.reader(reader)

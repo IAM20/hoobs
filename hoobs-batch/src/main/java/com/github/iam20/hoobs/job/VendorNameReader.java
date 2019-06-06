@@ -19,14 +19,14 @@ import com.github.iam20.hoobs.util.MacAddressParser;
 
 @Slf4j
 @Component
-public class MacAddressReader implements ItemStreamReader<MacAddress> {
+public class VendorNameReader implements ItemStreamReader<MacAddress> {
 	private ExecutionContext executionContext;
 	private String uri;
 	private List<String> lines;
 	private Iterator<String> lineIter;
 
 	@Autowired
-	public MacAddressReader(@Value("${ieee.macAddr.uri}")String uri) {
+	public VendorNameReader(@Value("${ieee.macAddr.uri}")String uri) {
 		this.uri = uri;
 		log.info(uri);
 	}
